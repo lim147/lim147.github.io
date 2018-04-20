@@ -1,2 +1,2 @@
 # lim147.github.io
-This is repository to set up my webpage.
+This is a repository to set up my webpage.
