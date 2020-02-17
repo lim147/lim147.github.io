@@ -1,0 +1,3 @@
+var _user$project$Sample$fac = function (n) {
+	return (_elm_lang$core$Native_Utils.cmp(n, 1) > 0) ? (n * _user$project$Sample$fac(n - 1)) : 1;
+};

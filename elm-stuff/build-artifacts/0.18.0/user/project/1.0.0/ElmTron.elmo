@@ -1,0 +1,1281 @@
+var _user$project$ElmTron$boardDimension = 700;
+var _user$project$ElmTron$bikeDimension = 4;
+var _user$project$ElmTron$gameOver = F2(
+	function (newHead, newTail) {
+		return A2(
+			_elm_lang$core$List$any,
+			F2(
+				function (x, y) {
+					return _elm_lang$core$Native_Utils.eq(x, y);
+				})(newHead),
+			newTail) || ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Tuple$first(newHead),
+			0 + _user$project$ElmTron$bikeDimension) < 1) || ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Tuple$first(newHead),
+			_user$project$ElmTron$boardDimension - _user$project$ElmTron$bikeDimension) > -1) || ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Tuple$second(newHead),
+			0 + _user$project$ElmTron$bikeDimension) < 1) || (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Tuple$second(newHead),
+			_user$project$ElmTron$boardDimension - _user$project$ElmTron$bikeDimension) > -1))));
+	});
+var _user$project$ElmTron$moveBike = F2(
+	function (_p0, d) {
+		var _p1 = _p0;
+		var _p4 = _p1._1;
+		var _p3 = _p1._0;
+		var _p2 = d;
+		switch (_p2.ctor) {
+			case 'Up':
+				return {ctor: '_Tuple2', _0: _p3, _1: _p4 + _user$project$ElmTron$bikeDimension};
+			case 'Down':
+				return {ctor: '_Tuple2', _0: _p3, _1: _p4 - _user$project$ElmTron$bikeDimension};
+			case 'Left':
+				return {ctor: '_Tuple2', _0: _p3 - _user$project$ElmTron$bikeDimension, _1: _p4};
+			default:
+				return {ctor: '_Tuple2', _0: _p3 + _user$project$ElmTron$bikeDimension, _1: _p4};
+		}
+	});
+var _user$project$ElmTron$view = function (model) {
+	var content = function () {
+		var _p5 = model;
+		switch (_p5.ctor) {
+			case 'GameOff':
+				return {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('350'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('325'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontSize('60'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text('Welcome to Elm Tron'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$text_,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x('350'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y('375'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$fontSize('40'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg$text('Press Space Bar To Start The Game!'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$text_,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$x('850'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$y('60'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg$text('Player 1 - 0'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$svg$Svg$text_,
+									{
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$x('850'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$y('90'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$svg$Svg$text('Player 2 - 0'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				};
+			case 'GamePause':
+				return {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('810'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('60'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'Player 1 - ',
+									_elm_lang$core$Basics$toString(_p5._0.score))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$text_,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x('810'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y('90'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'Player 2 - ',
+										_elm_lang$core$Basics$toString(_p5._1.score))),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$text_,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$x('350'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$y('350'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$fontSize('40'),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg$text('Press Space Bar to start the next round!'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				};
+			default:
+				var _p7 = _p5._1;
+				var _p6 = _p5._0;
+				var tail2 = A2(
+					_elm_lang$core$List$map,
+					function (coord) {
+						return A2(
+							_elm_lang$svg$Svg$rect,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x(
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Tuple$first(coord))),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y(
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Tuple$second(coord))),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$width(
+											_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$height(
+												_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('blue'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'});
+					},
+					_p7.tail);
+				var head2 = A2(
+					_elm_lang$svg$Svg$rect,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$x(
+							_elm_lang$core$Basics$toString(
+								_elm_lang$core$Tuple$first(_p7.head))),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y(
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Tuple$second(_p7.head))),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$width(
+									_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$height(
+										_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$rx('1'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$ry('1'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('blue'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'});
+				var tail1 = A2(
+					_elm_lang$core$List$map,
+					function (coord) {
+						return A2(
+							_elm_lang$svg$Svg$rect,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x(
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Tuple$first(coord))),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y(
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Tuple$second(coord))),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$width(
+											_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$height(
+												_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('red'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'});
+					},
+					_p6.tail);
+				var head1 = A2(
+					_elm_lang$svg$Svg$rect,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$x(
+							_elm_lang$core$Basics$toString(
+								_elm_lang$core$Tuple$first(_p6.head))),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y(
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Tuple$second(_p6.head))),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$width(
+									_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$height(
+										_elm_lang$core$Basics$toString(_user$project$ElmTron$bikeDimension)),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$rx('1'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$ry('1'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('red'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'});
+				var sb = {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('850'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('60'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'Player 1 - ',
+									_elm_lang$core$Basics$toString(_p6.score))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$text_,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x('850'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y('90'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'Player 2 - ',
+										_elm_lang$core$Basics$toString(_p7.score))),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				};
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					sb,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						{ctor: '::', _0: head1, _1: tail1},
+						{ctor: '::', _0: head2, _1: tail2}));
+		}
+	}();
+	var sb = {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$svg$Svg$rect,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$x('700'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$y('0'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('300'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('200'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$rx('1'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$ry('1'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('darkslategrey'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$rect,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$x('700'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$y('200'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$width('300'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$height('500'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$rx('1'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$ry('1'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fill('dimgrey'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$text_,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$x('850'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y('30'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fontSize('20'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg$text('Scores:'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('850'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('230'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontSize('20'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text('Rules:'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$text_,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$x('850'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$y('260'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg$text('Drive your bike around!'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$text_,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$x('850'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$y('290'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg$text('Careful! Don\'t collide with:'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$svg$Svg$text_,
+									{
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$x('850'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$y('320'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$svg$Svg$text('Walls'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$svg$Svg$text_,
+										{
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$x('850'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$y('350'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$svg$Svg$text('Your tail'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$svg$Svg$text_,
+											{
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$x('850'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$y('380'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$svg$Svg$text('Or the enemies tail!'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$svg$Svg$text_,
+												{
+													ctor: '::',
+													_0: _elm_lang$svg$Svg_Attributes$x('850'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$y('410'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$fill('darkturquoise'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$fontFamily('Impact'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$svg$Svg_Attributes$fontSize('20'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$svg$Svg$text('Controls:'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$svg$Svg$text_,
+													{
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$x('850'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$y('440'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$svg$Svg$text('Player 1 (red) moves with W,A,S,D'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$svg$Svg$text_,
+														{
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$x('850'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$y('470'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$svg$Svg$text('Player 2 (blue) moves with Arrow Keys'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$svg$Svg$text_,
+															{
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$x('850'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$svg$Svg_Attributes$y('500'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$svg$Svg_Attributes$fontFamily('Arial'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$svg$Svg$text('Hit R to reset the Game'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+	var bg = A2(
+		_elm_lang$svg$Svg$rect,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x('0'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y('0'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width(
+						_elm_lang$core$Basics$toString(_user$project$ElmTron$boardDimension)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(_user$project$ElmTron$boardDimension)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$rx('1'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$ry('1'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('black'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$svg,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width(
+						_elm_lang$core$Basics$toString(_user$project$ElmTron$boardDimension + 300)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(_user$project$ElmTron$boardDimension)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: bg,
+					_1: A2(_elm_lang$core$Basics_ops['++'], sb, content)
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$ElmTron$Bike = F4(
+	function (a, b, c, d) {
+		return {head: a, tail: b, direction: c, score: d};
+	});
+var _user$project$ElmTron$Right = {ctor: 'Right'};
+var _user$project$ElmTron$initBike1 = function (score) {
+	var tail = {ctor: '[]'};
+	var head = {ctor: '_Tuple2', _0: 24, _1: 24};
+	return {head: head, tail: tail, direction: _user$project$ElmTron$Right, score: score};
+};
+var _user$project$ElmTron$Left = {ctor: 'Left'};
+var _user$project$ElmTron$initBike2 = function (score) {
+	var tail = {ctor: '[]'};
+	var head = {ctor: '_Tuple2', _0: _user$project$ElmTron$boardDimension - 24, _1: _user$project$ElmTron$boardDimension - 24};
+	return {head: head, tail: tail, direction: _user$project$ElmTron$Left, score: score};
+};
+var _user$project$ElmTron$Down = {ctor: 'Down'};
+var _user$project$ElmTron$Up = {ctor: 'Up'};
+var _user$project$ElmTron$changeDirection1 = F2(
+	function (keyCode, dir) {
+		var _p8 = dir;
+		switch (_p8.ctor) {
+			case 'Left':
+				var _p9 = keyCode;
+				switch (_p9) {
+					case 83:
+						return _user$project$ElmTron$Up;
+					case 87:
+						return _user$project$ElmTron$Down;
+					default:
+						return dir;
+				}
+			case 'Right':
+				var _p10 = keyCode;
+				switch (_p10) {
+					case 83:
+						return _user$project$ElmTron$Up;
+					case 87:
+						return _user$project$ElmTron$Down;
+					default:
+						return dir;
+				}
+			case 'Up':
+				var _p11 = keyCode;
+				switch (_p11) {
+					case 65:
+						return _user$project$ElmTron$Left;
+					case 68:
+						return _user$project$ElmTron$Right;
+					default:
+						return dir;
+				}
+			default:
+				var _p12 = keyCode;
+				switch (_p12) {
+					case 65:
+						return _user$project$ElmTron$Left;
+					case 68:
+						return _user$project$ElmTron$Right;
+					default:
+						return dir;
+				}
+		}
+	});
+var _user$project$ElmTron$changeDirection2 = F2(
+	function (keyCode, dir) {
+		var _p13 = dir;
+		switch (_p13.ctor) {
+			case 'Left':
+				var _p14 = keyCode;
+				switch (_p14) {
+					case 40:
+						return _user$project$ElmTron$Up;
+					case 38:
+						return _user$project$ElmTron$Down;
+					default:
+						return dir;
+				}
+			case 'Right':
+				var _p15 = keyCode;
+				switch (_p15) {
+					case 40:
+						return _user$project$ElmTron$Up;
+					case 38:
+						return _user$project$ElmTron$Down;
+					default:
+						return dir;
+				}
+			case 'Up':
+				var _p16 = keyCode;
+				switch (_p16) {
+					case 37:
+						return _user$project$ElmTron$Left;
+					case 39:
+						return _user$project$ElmTron$Right;
+					default:
+						return dir;
+				}
+			default:
+				var _p17 = keyCode;
+				switch (_p17) {
+					case 37:
+						return _user$project$ElmTron$Left;
+					case 39:
+						return _user$project$ElmTron$Right;
+					default:
+						return dir;
+				}
+		}
+	});
+var _user$project$ElmTron$GameOn = F2(
+	function (a, b) {
+		return {ctor: 'GameOn', _0: a, _1: b};
+	});
+var _user$project$ElmTron$GamePause = F2(
+	function (a, b) {
+		return {ctor: 'GamePause', _0: a, _1: b};
+	});
+var _user$project$ElmTron$GameOff = {ctor: 'GameOff'};
+var _user$project$ElmTron$init = {ctor: '_Tuple2', _0: _user$project$ElmTron$GameOff, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$ElmTron$update = F2(
+	function (msg, model) {
+		var _p18 = model;
+		switch (_p18.ctor) {
+			case 'GameOff':
+				var _p19 = msg;
+				if ((_p19.ctor === 'KeyMsg') && (_p19._0 === 32)) {
+					return {
+						ctor: '_Tuple2',
+						_0: A2(
+							_user$project$ElmTron$GameOn,
+							_user$project$ElmTron$initBike1(0),
+							_user$project$ElmTron$initBike2(0)),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+			case 'GamePause':
+				var _p20 = msg;
+				_v15_2:
+				do {
+					if (_p20.ctor === 'KeyMsg') {
+						switch (_p20._0) {
+							case 32:
+								return {
+									ctor: '_Tuple2',
+									_0: A2(
+										_user$project$ElmTron$GameOn,
+										_user$project$ElmTron$initBike1(_p18._0.score),
+										_user$project$ElmTron$initBike2(_p18._1.score)),
+									_1: _elm_lang$core$Platform_Cmd$none
+								};
+							case 82:
+								return {ctor: '_Tuple2', _0: _user$project$ElmTron$GameOff, _1: _elm_lang$core$Platform_Cmd$none};
+							default:
+								break _v15_2;
+						}
+					} else {
+						break _v15_2;
+					}
+				} while(false);
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				var _p25 = _p18._1;
+				var _p24 = _p18._0;
+				var _p21 = msg;
+				if (_p21.ctor === 'KeyMsg') {
+					var _p23 = _p21._0;
+					var _p22 = _p23;
+					if (_p22 === 82) {
+						return {ctor: '_Tuple2', _0: _user$project$ElmTron$GameOff, _1: _elm_lang$core$Platform_Cmd$none};
+					} else {
+						var newDirection2 = A2(_user$project$ElmTron$changeDirection2, _p23, _p25.direction);
+						var newBike2 = _elm_lang$core$Native_Utils.update(
+							_p25,
+							{direction: newDirection2});
+						var newDirection1 = A2(_user$project$ElmTron$changeDirection1, _p23, _p24.direction);
+						var newBike1 = _elm_lang$core$Native_Utils.update(
+							_p24,
+							{direction: newDirection1});
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$ElmTron$GameOn, newBike1, newBike2),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+				} else {
+					var newTail2 = A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p25.tail,
+						{
+							ctor: '::',
+							_0: _p25.head,
+							_1: {ctor: '[]'}
+						});
+					var newHead2 = A2(_user$project$ElmTron$moveBike, _p25.head, _p25.direction);
+					var newBike2 = _elm_lang$core$Native_Utils.update(
+						_p25,
+						{head: newHead2, tail: newTail2});
+					var newTail1 = A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p24.tail,
+						{
+							ctor: '::',
+							_0: _p24.head,
+							_1: {ctor: '[]'}
+						});
+					var newHead1 = A2(_user$project$ElmTron$moveBike, _p24.head, _p24.direction);
+					var newBike1 = _elm_lang$core$Native_Utils.update(
+						_p24,
+						{head: newHead1, tail: newTail1});
+					var gameState1 = A2(
+						_user$project$ElmTron$gameOver,
+						newHead1,
+						{
+							ctor: '::',
+							_0: newHead2,
+							_1: A2(_elm_lang$core$Basics_ops['++'], newTail1, newTail2)
+						});
+					var gameState2 = A2(
+						_user$project$ElmTron$gameOver,
+						newHead2,
+						{
+							ctor: '::',
+							_0: newHead1,
+							_1: A2(_elm_lang$core$Basics_ops['++'], newTail2, newTail1)
+						});
+					if (gameState1 && gameState2) {
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$ElmTron$GamePause, newBike1, newBike2),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					} else {
+						if (gameState1) {
+							var winBike = _elm_lang$core$Native_Utils.update(
+								newBike2,
+								{score: newBike2.score + 1});
+							return {
+								ctor: '_Tuple2',
+								_0: A2(_user$project$ElmTron$GamePause, newBike1, winBike),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						} else {
+							if (gameState2) {
+								var winBike = _elm_lang$core$Native_Utils.update(
+									newBike1,
+									{score: newBike1.score + 1});
+								return {
+									ctor: '_Tuple2',
+									_0: A2(_user$project$ElmTron$GamePause, winBike, newBike2),
+									_1: _elm_lang$core$Platform_Cmd$none
+								};
+							} else {
+								return {
+									ctor: '_Tuple2',
+									_0: A2(_user$project$ElmTron$GameOn, newBike1, newBike2),
+									_1: _elm_lang$core$Platform_Cmd$none
+								};
+							}
+						}
+					}
+				}
+		}
+	});
+var _user$project$ElmTron$KeyMsg = function (a) {
+	return {ctor: 'KeyMsg', _0: a};
+};
+var _user$project$ElmTron$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
+};
+var _user$project$ElmTron$subscriptions = function (model) {
+	var _p26 = model;
+	switch (_p26.ctor) {
+		case 'GameOff':
+			return _elm_lang$keyboard$Keyboard$downs(_user$project$ElmTron$KeyMsg);
+		case 'GamePause':
+			return _elm_lang$keyboard$Keyboard$downs(_user$project$ElmTron$KeyMsg);
+		default:
+			return _elm_lang$core$Platform_Sub$batch(
+				{
+					ctor: '::',
+					_0: _elm_lang$keyboard$Keyboard$downs(_user$project$ElmTron$KeyMsg),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$animation_frame$AnimationFrame$times(_user$project$ElmTron$Tick),
+						_1: {ctor: '[]'}
+					}
+				});
+	}
+};
+var _user$project$ElmTron$main = _elm_lang$html$Html$program(
+	{init: _user$project$ElmTron$init, update: _user$project$ElmTron$update, view: _user$project$ElmTron$view, subscriptions: _user$project$ElmTron$subscriptions})();

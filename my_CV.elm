@@ -356,7 +356,7 @@ main = div [outsideStyle]
                         ul [] 
                            [
                                 b [style [("color","#009987")]] [text "★ "],
-                                text "StepSafe",
+                                a [href "https://github.com/lim147/CS-2XB3",target "_blank",hyperlinkStyle] [text "StepSafe"],
                                 text " - A web mapping application aims to track historic crime data of Great Toronto Area and generate commuting routines that will avoid high crime. The design and implementation applied sorting, searching, graphing algorithms as well as bigdata processing and version control strategies"
 
 
